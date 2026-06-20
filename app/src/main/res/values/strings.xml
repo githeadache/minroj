@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Minröj</string>
+    <string name="difficulty_small">Liten</string>
+    <string name="difficulty_medium">Mellan</string>
+    <string name="difficulty_large">Stor</string>
+    <string name="btn_flag_mode">Markera</string>
+    <string name="btn_reset">Ny spelomgång</string>
+</resources>

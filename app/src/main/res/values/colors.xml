@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background">#C0C0C0</color>
+    <color name="status_bar_bg">#A0A0A0</color>
+    <color name="display_red">#FF2020</color>
+    <color name="primary">#607D8B</color>
+    <color name="primaryDark">#455A64</color>
+    <color name="accent">#FF5722</color>
+</resources>
