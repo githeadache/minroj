@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
+    id("com.google.firebase.appdistribution")
 }
 
 android {
@@ -17,6 +19,12 @@ android {
     }
 
     buildTypes {
+        debug {
+            firebaseAppDistribution {
+                releaseNotesFile = "release-notes.txt"
+                groups = "familjen"
+            }
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
