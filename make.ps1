@@ -5,11 +5,14 @@ $env:PATH      = "$env:JAVA_HOME\bin;$env:PATH"
 
 $ADB     = "C:\Android\Sdk\platform-tools\adb.exe"
 $PACKAGE = "se.familjenhed.minroj"
-$APK     = Get-ChildItem "app\build\outputs\apk\debug\*.apk" | Select-Object -First 1 -ExpandProperty FullName
 
 switch ($Target) {
     "build"      { .\gradlew assembleDebug }
-    "install"    { .\gradlew assembleDebug; & $ADB install -r $APK }
+    "install"    {
+        .\gradlew assembleDebug
+        $APK = Get-ChildItem "app\build\outputs\apk\debug\*.apk" | Select-Object -First 1 -ExpandProperty FullName
+        & $ADB install -r $APK
+    }
     "uninstall"  { & $ADB uninstall $PACKAGE }
     "release"    { .\gradlew assembleRelease }
     "clean"      { .\gradlew clean }
