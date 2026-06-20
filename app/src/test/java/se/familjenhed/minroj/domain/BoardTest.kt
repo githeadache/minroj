@@ -54,9 +54,10 @@ class BoardTest {
 
     @Test
     fun `revealing a mine results in LOST`() {
-        val b = Board(Difficulty.SMALL, mineAt33)
-        b.reveal(8, 8)   // start safely
-        b.reveal(3, 3)   // mine
+        val mineAt00 = MineGenerator { _, _, _ -> setOf(0 to 0) }
+        val b = Board(Difficulty.SMALL, mineAt00)
+        b.reveal(0, 1)   // adjacent to mine → only this cell revealed
+        b.reveal(0, 0)   // mine
 
         assertEquals(GameStatus.LOST, b.status)
     }

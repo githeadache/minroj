@@ -10,5 +10,6 @@ data class GameUiState(
     val status: GameStatus = GameStatus.IDLE,
     val remainingFlags: Int = 0,
     val elapsedSeconds: Int = 0,
-    val isFlagMode: Boolean = false
+    val isFlagMode: Boolean = false,
+    val isNewHighScore: Boolean = false
 )

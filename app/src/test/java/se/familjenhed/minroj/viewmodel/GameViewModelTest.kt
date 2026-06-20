@@ -58,15 +58,16 @@ class GameViewModelTest {
 
     @Test
     fun `first click transitions status to PLAYING`() = runTest {
-        viewModel.onCellClick(4, 4)
+        val vm = GameViewModel(mineGenerator = mineAt00)
+        vm.onCellClick(0, 1)   // adjacent to mine at (0,0) → only this cell revealed
 
-        assertEquals(GameStatus.PLAYING, viewModel.uiState.value.status)
+        assertEquals(GameStatus.PLAYING, vm.uiState.value.status)
     }
 
     @Test
     fun `clicking a mine results in LOST`() = runTest {
         val vm = GameViewModel(mineGenerator = mineAt00)
-        vm.onCellClick(8, 8)   // start safely
+        vm.onCellClick(0, 1)   // adjacent to mine → PLAYING
         vm.onCellClick(0, 0)   // mine
 
         assertEquals(GameStatus.LOST, vm.uiState.value.status)

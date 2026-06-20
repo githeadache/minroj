@@ -20,6 +20,7 @@ android {
 
     buildTypes {
         debug {
+            enableUnitTestCoverage = true
             firebaseAppDistribution {
                 releaseNotesFile = "release-notes.txt"
                 groups = "familjen"
@@ -42,6 +43,15 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+
+    testOptions {
+        unitTests {
+            isReturnDefaultValues = true
+            all {
+                it.jvmArgs("-Dfile.encoding=UTF-8", "-Dsun.jnu.encoding=UTF-8")
+            }
+        }
     }
 }
 

@@ -1,5 +1,4 @@
-v1.0
-• Första testversionen av Minröj
-• Tre svårighetsgrader: Liten (9×9), Mellan (16×16), Stor (16×30)
-• Tryck på ruta för att avslöja — tryck på Markera-knappen för att sätta flagga
-• Klassisk flood-fill: tomma områden rensas automatiskt
+v1.1
+• Highscore-lista — topp 10 bästa tider per svårighetsgrad, sparas lokalt
+• "🏆 Nytt rekord!"-notis när du slår ditt rekord
+• Highscore-knapp i gränssnittet, bläddra mellan svårighetsgrader i dialogen

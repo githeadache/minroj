@@ -130,11 +130,21 @@
         <Button
             android:id="@+id/btnFlagMode"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
             android:text="🚩 Markera"
-            android:textSize="16sp"
-            android:paddingHorizontal="24dp" />
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnHighScore"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="🏆 Highscore"
+            android:textSize="16sp" />
 
     </LinearLayout>
 
