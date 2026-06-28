@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import se.familjenhed.minroj.domain.Cell
@@ -19,7 +20,12 @@ class GameBoardView @JvmOverloads constructor(
         fun onCellClick(row: Int, col: Int)
     }
 
+    fun interface CellLongClickListener {
+        fun onCellLongClick(row: Int, col: Int)
+    }
+
     var cellClickListener: CellClickListener? = null
+    var cellLongClickListener: CellLongClickListener? = null
     var cells: List<List<Cell>> = emptyList()
         set(value) {
             field = value
@@ -34,6 +40,31 @@ class GameBoardView @JvmOverloads constructor(
 
     private val cellSizePx: Float
         get() = resources.displayMetrics.density * CELL_SIZE_DP
+
+    private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+        override fun onSingleTapUp(e: MotionEvent): Boolean {
+            cellAt(e)?.let { (row, col) ->
+                cellClickListener?.onCellClick(row, col)
+                performClick()
+            }
+            return true
+        }
+
+        override fun onLongPress(e: MotionEvent) {
+            cellAt(e)?.let { (row, col) ->
+                cellLongClickListener?.onCellLongClick(row, col)
+                performLongClick()
+            }
+        }
+    })
+
+    private fun cellAt(e: MotionEvent): Pair<Int, Int>? {
+        val col = (e.x / cellSizePx).toInt()
+        val row = (e.y / cellSizePx).toInt()
+        val rowCount = cells.size
+        val colCount = cells.firstOrNull()?.size ?: 0
+        return if (row in 0 until rowCount && col in 0 until colCount) row to col else null
+    }
 
     private val paintCell = Paint().apply { color = 0xFFC0C0C0.toInt() }
     private val paintRevealed = Paint().apply { color = 0xFFBDBDBD.toInt() }
@@ -152,16 +183,7 @@ class GameBoardView @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_UP) {
-            val col = (event.x / cellSizePx).toInt()
-            val row = (event.y / cellSizePx).toInt()
-            val rowCount = cells.size
-            val colCount = cells.firstOrNull()?.size ?: 0
-            if (row in 0 until rowCount && col in 0 until colCount) {
-                cellClickListener?.onCellClick(row, col)
-                performClick()
-            }
-        }
+        gestureDetector.onTouchEvent(event)
         return true
     }
 

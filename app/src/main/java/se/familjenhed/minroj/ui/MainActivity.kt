@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity() {
         binding.gameBoardView.cellClickListener = GameBoardView.CellClickListener { row, col ->
             viewModel.onCellClick(row, col)
         }
+        binding.gameBoardView.cellLongClickListener = GameBoardView.CellLongClickListener { row, col ->
+            viewModel.onCellLongClick(row, col)
+        }
     }
 
     private fun setupControlButtons() {

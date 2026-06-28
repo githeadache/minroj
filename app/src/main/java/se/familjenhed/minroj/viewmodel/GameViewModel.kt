@@ -72,6 +72,16 @@ class GameViewModel(
         if (board.status == GameStatus.WON || board.status == GameStatus.LOST) timerJob?.cancel()
     }
 
+    fun onCellLongClick(row: Int, col: Int) {
+        val state = _uiState.value
+        if (state.status == GameStatus.WON || state.status == GameStatus.LOST) return
+        board.toggleFlag(row, col)
+        _uiState.value = state.copy(
+            cells = board.cells,
+            remainingFlags = board.remainingFlags
+        )
+    }
+
     fun toggleFlagMode() {
         _uiState.value = _uiState.value.copy(isFlagMode = !_uiState.value.isFlagMode)
     }
