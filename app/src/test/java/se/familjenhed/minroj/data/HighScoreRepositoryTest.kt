@@ -24,8 +24,18 @@ class HighScoreRepositoryTest {
     }
 
     @Test
-    fun `first score always qualifies`() {
+    fun `first score is a new record`() {
         assertTrue(repository.addScore(Difficulty.SMALL, 120))
+    }
+
+    @Test
+    fun `top-10 score that is not fastest does not count as new record`() {
+        repository.addScore(Difficulty.SMALL, 100) // fastest so far
+
+        val isRecord = repository.addScore(Difficulty.SMALL, 110) // top-10 but slower
+
+        assertFalse(isRecord)
+        assertEquals(2, repository.getTopScores(Difficulty.SMALL).size)
     }
 
     @Test
