@@ -50,6 +50,15 @@ class BoardTest {
         assertTrue(board.cells[5][5].isRevealed)
     }
 
+    @Test
+    fun `first click with real generator is always safe`() {
+        repeat(50) {
+            val b = Board(Difficulty.SMALL)
+            b.reveal(4, 4)
+            assertEquals(GameStatus.PLAYING, b.status)
+        }
+    }
+
     // --- hitting a mine ---
 
     @Test
