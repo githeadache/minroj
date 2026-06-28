@@ -1,2 +1,2 @@
-v1.2
-• "🏆 Nytt rekord!"-notisen visas nu bara när du slår den allra snabbaste tiden – inte bara vid en topp-10-placering
+v1.3
+• Håll inne en cell för att placera eller ta bort en flagga – inget behov av att växla flaggläge
