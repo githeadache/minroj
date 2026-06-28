@@ -1,4 +1,2 @@
-v1.1
-• Highscore-lista — topp 10 bästa tider per svårighetsgrad, sparas lokalt
-• "🏆 Nytt rekord!"-notis när du slår ditt rekord
-• Highscore-knapp i gränssnittet, bläddra mellan svårighetsgrader i dialogen
+v1.2
+• "🏆 Nytt rekord!"-notisen visas nu bara när du slår den allra snabbaste tiden – inte bara vid en topp-10-placering
