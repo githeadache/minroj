@@ -12,6 +12,7 @@ class HighScoreRepository(private val storage: HighScoreStorage) {
 
     fun addScore(difficulty: Difficulty, timeSeconds: Int): Boolean {
         val existing = getTopScores(difficulty)
+        val isFastest = existing.isEmpty() || timeSeconds < existing.first().timeSeconds
         val qualifies = existing.size < MAX_ENTRIES || timeSeconds < existing.last().timeSeconds
         if (qualifies) {
             val updated = (existing + HighScore(timeSeconds, System.currentTimeMillis()))
@@ -19,7 +20,7 @@ class HighScoreRepository(private val storage: HighScoreStorage) {
                 .take(MAX_ENTRIES)
             storage.save(difficulty.name, serialize(updated))
         }
-        return qualifies
+        return isFastest
     }
 
     private fun serialize(scores: List<HighScore>): String =
